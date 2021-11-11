@@ -47,6 +47,13 @@ namespace MongoDBRideTest
                 Console.WriteLine(item.ToString());
             }
         }
+        static void AddIndex()
+        {
+            var collection = GetCollection();
+            var createIndexKeyDef = Builders<RandomValueEntity>.IndexKeys.Ascending(c => c.RandomValue);
+            collection.Indexes.CreateOne(new CreateIndexModel<RandomValueEntity>(createIndexKeyDef));
+            Console.WriteLine("Created");
+        }
         static void Test()
         {
             Create(new List<RandomValueEntity>
@@ -71,7 +78,8 @@ namespace MongoDBRideTest
         }
         static void Main(string[] args)
         {
-            Test();
+            //Test();
+            AddIndex();
             Console.ReadLine();
         }
     }
